@@ -1,22 +1,24 @@
 package tests;
 
+import config.WebDriverConfig;
 import config.WebDriverProvider;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.openqa.selenium.WebDriver;
+import org.junit.jupiter.api.BeforeAll;
+import com.codeborne.selenide.Selenide;
 
 public class BaseTest {
-    protected WebDriver driver;
+    private static final WebDriverConfig config =
+            ConfigFactory.create(WebDriverConfig.class, System.getProperties());
 
-    @BeforeEach
-    public void setUp() {
-        driver = new WebDriverProvider().get();
+    @BeforeAll
+    public static void beforeAll() {
+        WebDriverProvider webDriverProvider = new WebDriverProvider();
+        webDriverProvider.get();
     }
 
     @AfterEach
-    public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+    public void afterEach() {
+        Selenide.closeWebDriver();
     }
 }

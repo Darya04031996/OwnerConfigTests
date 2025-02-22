@@ -4,7 +4,10 @@ import org.aeonbits.owner.Config;
 
 import java.net.URL;
 
-@Config.Sources("classpath:webdriver.properties")
+@Config.Sources({
+        "classpath:${env}.properties",
+        "classpath:webdriver.properties"
+})
 public interface WebDriverConfig extends Config {
 
     @Key("baseUrl")
@@ -16,11 +19,11 @@ public interface WebDriverConfig extends Config {
     Browser getBrowser();
 
     @Key("browserVersion")
-    @DefaultValue("latest")
+    @DefaultValue("120")
     String getBrowserVersion();
 
     @Key("remoteUrl")
-    @DefaultValue("http://localhost:4444/wd/hub")
+    @DefaultValue("https://user1:1234@selenoid.autotests.cloud/wd/hub")
     URL getRemoteURL();
 
     @Key("runRemote")
