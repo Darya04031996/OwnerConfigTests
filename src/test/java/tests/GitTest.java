@@ -9,6 +9,6 @@ public class GitTest extends BaseTest {
     @Test
     public void testGithub() {
         String title = driver.getTitle();
-        assertEquals("GitHub: Let’s build from here · GitHub", title);
+        assertEquals("Build and ship software on a single, collaborative platform", title);
     }
 }

@@ -1,15 +1,14 @@
 package tests;
 
-import config.WebDriverConfig;
+
 import config.WebDriverProvider;
-import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import com.codeborne.selenide.Selenide;
+import org.openqa.selenium.WebDriver;
 
 public class BaseTest {
-    private static final WebDriverConfig config =
-            ConfigFactory.create(WebDriverConfig.class, System.getProperties());
+    protected WebDriver driver;
 
     @BeforeAll
     public static void beforeAll() {
