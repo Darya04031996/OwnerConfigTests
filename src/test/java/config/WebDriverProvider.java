@@ -10,6 +10,8 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.util.Map;
+
 public class WebDriverProvider {
     private final WebDriverConfig config;
 
@@ -46,8 +48,10 @@ public class WebDriverProvider {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setBrowserName(config.getBrowser().toString().toLowerCase());
         capabilities.setVersion(config.getBrowserVersion());
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", false);
+        capabilities.setCapability("selenoid:options", Map.<String, Object>of(
+                "enableVNC", true,
+                "enableVideo", true
+        ));
 
         return new RemoteWebDriver(config.getRemoteURL(), capabilities);
     }
